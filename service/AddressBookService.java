@@ -40,7 +40,7 @@ public class AddressBookService {
 
 	}
 
-	//Edit contact
+	// Edit contact
 	public void updatePerson(String name) {
 		int flag = 0;
 		for (AddressBookModel model : addressBookModels) {
@@ -70,7 +70,7 @@ public class AddressBookService {
 					int zip = scanner.nextInt();
 					model.setZip(zip);
 					break;
-				default :
+				default:
 					System.out.println("Enter valid field");
 					break;
 				}
@@ -82,8 +82,25 @@ public class AddressBookService {
 			System.out.println("Updated Successfully");
 
 	}
-	
-	//Print addressbook
+
+	static public AddressBookModel getContact(String name) {
+		for (AddressBookModel cont : addressBookModels) {
+			if (cont.getFirstName().equals(name)) {
+				return cont;
+			} else {
+				System.out.println("Invalid name");
+			}
+
+		}
+		return null;
+	}
+
+	public void deletePerson(String name) // Delete Person
+	{
+		addressBookModels.remove(getContact(name));
+	}
+
+	// Print addressbook
 	public void print() {
 		for (AddressBookModel items : addressBookModels) {
 			System.out.println(items);
