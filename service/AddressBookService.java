@@ -10,11 +10,13 @@ public class AddressBookService {
 	public static Scanner scanner = new Scanner(System.in);
 
 	// Add contact to addressbook
-	public void createPerson() {
+	public static void createPerson() {
 		AddressBookModel addressBookModel = new AddressBookModel();
 
 		System.out.println("Enter Your First Name");
 		String firstName = scanner.next();
+		addressBookModel.setFirstName(firstName);
+		uniquePerson(firstName);
 		System.out.println("Enter Your Last Name");
 		String lastName = scanner.next();
 		System.out.println("Enter Your city Name");
@@ -27,15 +29,14 @@ public class AddressBookService {
 		int zip = scanner.nextInt();
 		System.out.println("Enter Your email");
 		String email = scanner.next();
-
-		addressBookModel.setFirstName(firstName);
+		
 		addressBookModel.setLastName(lastName);
 		addressBookModel.setCity(city);
 		addressBookModel.setEmail(email);
 		addressBookModel.setPhoneNo(phNo);
 		addressBookModel.setState(state);
 		addressBookModel.setZip(zip);
-
+		
 		addressBookModels.add(addressBookModel);
 
 	}
@@ -98,6 +99,17 @@ public class AddressBookService {
 	public void deletePerson(String name) // Delete Person
 	{
 		addressBookModels.remove(getContact(name));
+	}
+
+	// Unique Person
+	static public String uniquePerson(String name) {
+		for (AddressBookModel addressBookModel : addressBookModels) {
+			if (addressBookModel.getFirstName().equals(name)) {
+				System.out.println("Person already exist");
+				createPerson();
+			} 
+		}
+		return null;
 	}
 
 	// Print addressbook
